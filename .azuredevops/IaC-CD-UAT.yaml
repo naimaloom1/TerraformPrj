@@ -1,0 +1,15 @@
+name: SGI_APE_TERRAFORM_UAT_EUROPE $(Rev:.r) - $(Date:yyyy-MM-dd)
+variables:
+  - group: IaC_Variables_SGI_APE
+pool:
+  vmImage: 'ubuntu-latest'
+stages:
+  - template: templates/IaC-CD-Stages-Template.yaml
+    parameters:
+      prefix: '$(prefix)'
+      azureServiceConnectionName: DEV_SGI_APE
+      environmentName: 'uat'
+      path: 'src/01-iac'
+      varFile: 'src/01-iac/vars_uat_europe.tfvars'
+      publishOutput: true
+      utilResourceGroupName: '$(UtilResourceGroupName)'

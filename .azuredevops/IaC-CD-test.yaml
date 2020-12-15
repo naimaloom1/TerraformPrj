@@ -1,0 +1,15 @@
+name: IaC-CD-DataInsights-test $(Rev:.r) - $(Date:yyyy-MM-dd)
+variables:
+  - group: IaC_Variables_DataInsights
+pool:
+  vmImage: 'ubuntu-latest'
+stages:
+  - template: templates/IaC-CD-Stages-Template.yaml
+    parameters:
+      prefix: '$(prefix)'
+      azureServiceConnectionName: '$(AzureServiceConnection_test)'
+      environmentName: 'test'
+      path: 'src/01-iac'
+      varFile: 'src/01-iac/vars_test.tfvars'
+      publishOutput: true
+      utilResourceGroupName: '$(UtilResourceGroupName)'
